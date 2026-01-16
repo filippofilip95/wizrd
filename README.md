@@ -65,29 +65,52 @@ That's it. Claude now has context about your entire company.
 ## Repository Structure
 
 ```
-WIZRD/
-├── CLAUDE.md                    # Company-wide context (loaded every session)
-├── AI-AGENTS.md                 # Agent/skill system documentation
+wizrd/
+├── CLAUDE.md                    # Company context (loaded every session)
+├── AI-AGENTS.md                 # Agent/skill documentation
+├── LICENSE                      # MIT license
 │
 ├── .claude/
-│   ├── agents/                  # 14 specialized agents for complex tasks
-│   └── skills/                  # Auto-invoked guidelines and templates
+│   ├── agents/                  # 14 specialized agents
+│   │   ├── sales.md             # Lead qualification, proposals
+│   │   ├── content.md           # LinkedIn, case studies
+│   │   ├── strategy.md          # Discovery synthesis
+│   │   ├── build.md             # Technical implementation
+│   │   ├── research.md          # Company/industry analysis
+│   │   ├── review.md            # Repo validation
+│   │   └── ...                  # + 8 more agents
+│   │
+│   └── skills/                  # Auto-invoked guidelines
+│       ├── init/                # /init - setup wizard
+│       ├── pdf/                 # /pdf - markdown to PDF
+│       └── support/             # Client issue triage
 │
 ├── clients/
-│   ├── templates/               # Reusable client document templates
-│   └── _example-acme-widgets/   # Example client (delete when ready)
+│   ├── templates/               # Client document templates
+│   └── _example-acme-widgets/   # Example (delete when ready)
 │
 ├── projects/
-│   └── templates/               # Project management templates
+│   └── templates/               # plan.md, context.md, tasks.md
 │
 ├── knowledge-base/
-│   └── playbooks/               # How-to guides and patterns
+│   ├── playbooks/               # How-to guides
+│   └── lessons-learned/         # Post-project insights
 │
 ├── content/
-│   └── templates/               # Content creation templates
+│   ├── templates/               # Case study template
+│   └── linkedin/                # Posts database + drafts
 │
-└── operations/
-    └── templates/               # Operational templates
+├── operations/
+│   └── templates/               # Weekly review template
+│
+├── scripts/
+│   └── validate-repo.sh         # CI/CD validation script
+│
+├── tools/
+│   └── pdf-generator/           # Markdown to PDF tool
+│
+└── .github/
+    └── workflows/               # GitHub Actions (validation)
 ```
 
 ---
