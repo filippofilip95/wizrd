@@ -1,0 +1,44 @@
+name: WIZRD Repository Validation
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  # Manual trigger
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate Repository Structure
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run validation script
+        id: validate
+        run: |
+          chmod +x scripts/validate-repo.sh
+          ./scripts/validate-repo.sh
+        continue-on-error: true
+
+      - name: Check validation result
+        run: |
+          if [ "${{ steps.validate.outcome }}" == "failure" ]; then
+            echo "::error::Repository validation failed with critical issues"
+            exit 1
+          fi
+
+      - name: Post PR comment on failure
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '## ❌ Repository Validation Failed\n\nPlease check the workflow logs for details.\n\n**Common issues:**\n- Missing CLAUDE.md in client folders\n- Invalid YAML frontmatter\n- Missing required fields in agents/skills\n- Stale tasks.md (>30 days old)\n\n**Run locally:**\n```bash\n./scripts/validate-repo.sh\n```'
+            })

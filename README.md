@@ -4,6 +4,8 @@
 
 Transform how you work: every client, project, and workflow becomes code that AI understands and executes. No more re-explaining context. No more forgotten decisions. Your company has a permanent brain.
 
+**Works with:** [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (CLI) and [Claude Cowork](https://www.anthropic.com/news/cowork-claude-code-for-the-rest-of-your-work) (macOS app)
+
 ---
 
 ## What is WIZRD?
@@ -22,10 +24,14 @@ Transform how you work: every client, project, and workflow becomes code that AI
 ## 4-Minute Setup
 
 ### 1. Install Prerequisites
+
+**Option A: Claude Code (CLI)**
 ```bash
-# Install Claude Code CLI
 npm install -g @anthropic-ai/claude-code
 ```
+
+**Option B: Claude Cowork (macOS app)**
+Download from [claude.ai](https://claude.ai) - requires Claude Max subscription
 
 ### 2. Clone This Template
 ```bash

@@ -1,8 +1,32 @@
-# Tools Directory
+# Tools & Scripts
 
 Utility scripts and tools for WIZRD operations.
 
-## Available Tools
+## Scripts
+
+### Repository Validation
+`scripts/validate-repo.sh`
+
+Validates repo structure, frontmatter, and consistency. For CI/CD integration.
+
+```bash
+# Full validation
+./scripts/validate-repo.sh
+
+# Quick check (structure only)
+./scripts/validate-repo.sh --quick
+```
+
+**Exit codes:**
+- `0` - All checks pass
+- `1` - Warnings found
+- `2` - Critical issues
+
+**GitHub Actions:** `.github/workflows/validate-repo.yml` runs this automatically on push/PR.
+
+---
+
+## Tools
 
 ### PDF Generator
 `tools/pdf-generator/`

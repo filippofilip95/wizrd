@@ -140,6 +140,28 @@ Generated: [timestamp]
 - Outdated status fields
 - Missing documentation sections
 
+## Quick Validation (Script)
+
+For fast, non-conversational validation, use the shell script:
+
+```bash
+# Full validation
+./scripts/validate-repo.sh
+
+# Quick check (structure only)
+./scripts/validate-repo.sh --quick
+```
+
+**Exit codes:**
+- `0` - All checks pass
+- `1` - Warnings found (non-blocking)
+- `2` - Critical issues (blocking)
+
+**GitHub Actions:**
+The `.github/workflows/validate-repo.yml` workflow runs validation automatically on:
+- Push to main/develop
+- Pull requests to main
+
 ## Decision Authority
 
 **Auto-Execute:**
@@ -160,3 +182,4 @@ Generated: [timestamp]
 
 **Automation Level**: 100% - fully automated validation
 **Output**: Structured report to stdout or `/operations/health-reports/`
+**Script**: `./scripts/validate-repo.sh`
