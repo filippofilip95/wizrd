@@ -1,0 +1,244 @@
+/* WIZRD PDF Template */
+/* Customize colors and fonts to match your brand */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ===========================================
+   BRAND CUSTOMIZATION - Edit these values!
+   =========================================== */
+:root {
+  --primary: #552cd5;      /* Your brand color */
+  --primary-light: #7c5ce7;
+  --text: #171717;         /* Body text */
+  --text-light: #5f6368;   /* Secondary text */
+  --accent: #0ea5e9;       /* Highlights, links */
+  --border: #dadce0;       /* Table borders */
+  --bg-light: #f8f9fc;     /* Quote backgrounds */
+}
+
+/* ===========================================
+   PAGE SETUP
+   =========================================== */
+@page {
+  size: A4;
+  margin: 2cm 2cm 2.5cm 2cm;
+
+  @bottom-left {
+    content: "Your Company";  /* ← Change this */
+    font-size: 9pt;
+    font-weight: 500;
+    color: var(--primary);
+    font-family: 'Inter', sans-serif;
+  }
+
+  @bottom-right {
+    content: counter(page);
+    font-size: 9pt;
+    color: var(--text-light);
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* ===========================================
+   TYPOGRAPHY
+   =========================================== */
+body {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 11pt;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+h1 {
+  font-size: 26pt;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 0;
+  margin-bottom: 0.8em;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 15pt;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 2.5em;
+  margin-bottom: 0.8em;
+  padding-bottom: 0.4em;
+  border-bottom: 2px solid var(--primary);
+  page-break-after: avoid;
+}
+
+h3 {
+  font-size: 12pt;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 1.8em;
+  margin-bottom: 0.6em;
+}
+
+h4 {
+  font-size: 11pt;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 1.4em;
+  margin-bottom: 0.5em;
+}
+
+/* Subtitle styling */
+h1 + p strong {
+  color: var(--primary);
+  font-style: italic;
+  font-weight: 500;
+}
+
+p {
+  margin-bottom: 1.1em;
+  orphans: 3;
+  widows: 3;
+}
+
+/* ===========================================
+   LINKS
+   =========================================== */
+a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ===========================================
+   LISTS
+   =========================================== */
+ul, ol {
+  margin-bottom: 1.2em;
+  padding-left: 1.8em;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+li > ul, li > ol {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+
+/* ===========================================
+   TABLES
+   =========================================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.8em 0;
+  font-size: 10pt;
+  page-break-inside: avoid;
+}
+
+th {
+  padding: 0.8em 1em;
+  text-align: left;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+td {
+  padding: 0.7em 1em;
+  border: 1px solid var(--border);
+  vertical-align: top;
+}
+
+tr:nth-child(even) td {
+  background-color: #fafafa;
+}
+
+td strong {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* ===========================================
+   BLOCKQUOTES
+   =========================================== */
+blockquote {
+  border-left: 4px solid var(--primary);
+  margin: 2em 0;
+  padding: 1em 1.5em;
+  background-color: var(--bg-light);
+  font-style: italic;
+  page-break-inside: avoid;
+  border-radius: 0 4px 4px 0;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===========================================
+   CODE
+   =========================================== */
+pre {
+  background-color: #171717;
+  color: #f8f9fa;
+  padding: 1em;
+  border-radius: 4px;
+  font-size: 9pt;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+
+code {
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 0.9em;
+}
+
+p code, li code {
+  background-color: #f8f9fa;
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  color: var(--primary);
+}
+
+/* ===========================================
+   HORIZONTAL RULES
+   =========================================== */
+hr {
+  border: none;
+  border-top: 2px solid var(--primary);
+  margin: 2.5em 0;
+}
+
+/* ===========================================
+   FOOTER
+   =========================================== */
+.document-footer {
+  margin-top: 4em;
+  padding-top: 2em;
+  border-top: 2px solid var(--primary);
+}
+
+.footer-table {
+  width: 100%;
+  font-size: 9pt;
+  border: 1px solid #e0e0e0;
+  margin-top: 1.5em;
+}
+
+.footer-table td {
+  padding: 0.6em 1em;
+  border: 1px solid #e0e0e0;
+  vertical-align: top;
+  color: #555555;
+}
+
+.footer-table a {
+  color: var(--primary);
+  font-weight: 500;
+}

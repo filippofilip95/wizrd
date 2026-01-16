@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>$if(title)$$title$$else$Document$endif$</title>
+  <style>
+    /* Styles are embedded from styles.css by Pandoc */
+  </style>
+$for(header-includes)$
+  $header-includes$
+$endfor$
+</head>
+<body>
+
+<main class="content">
+$body$
+</main>
+
+<!--
+  CUSTOMIZE THIS FOOTER with your company info:
+  - Company name
+  - Website
+  - Contact details
+  - Logo (optional)
+-->
+<footer class="document-footer">
+  <table class="footer-table">
+    <tr>
+      <td><strong>Your Company Name</strong></td>
+      <td>www.yourcompany.com</td>
+      <td>contact@yourcompany.com</td>
+    </tr>
+  </table>
+</footer>
+
+$for(include-after)$
+$include-after$
+$endfor$
+</body>
+</html>

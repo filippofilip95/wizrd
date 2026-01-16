@@ -13,6 +13,7 @@ Skills are auto-invoked guidelines that provide templates, standards, and workfl
 | Skill | Triggers | Purpose |
 |-------|----------|---------|
 | `init` | `/init`, setup, initialize, configure | **Setup wizard** - personalizes repo after cloning |
+| `pdf` | `/pdf`, generate PDF, convert to PDF | **PDF generator** - markdown to branded PDF |
 | `support` | client issue, bug, ticket, problem | Issue triage, response templates |
 | `_template` | - | Template for creating new skills |
 
@@ -21,7 +22,8 @@ Skills are auto-invoked guidelines that provide templates, standards, and workfl
 Some skills can be run directly with slash commands:
 
 ```bash
-/init    # Run the setup wizard to personalize your WIZRD
+/init              # Run the setup wizard to personalize your WIZRD
+/pdf document.md   # Convert markdown to branded PDF
 ```
 
 ## Creating New Skills
