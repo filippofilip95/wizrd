@@ -1,0 +1,64 @@
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+credentials.json
+
+# Sensitive client data (if any slips through)
+clients/*/confidential/
+clients/*/contracts/
+clients/*/invoices/*-PAID.md
+
+# Financial sensitive data
+operations/finance/bank-details.md
+operations/finance/tax-records/
+
+# IDE and editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node modules (if any scripts use npm)
+node_modules/
+
+# Python (if any scripts use Python)
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Claude Code cache (if any)
+.claude-cache/
+
+# Backup files
+*.bak
+*.backup
+
+# Archive (large files you don't want in git)
+archive/
+*.zip
+*.tar.gz
