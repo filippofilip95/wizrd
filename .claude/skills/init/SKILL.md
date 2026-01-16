@@ -1,6 +1,6 @@
 ---
 name: init
-description: Initialize and personalize your WIZRD repository. Run this after cloning to set up your company context, brand voice, and first client. The wizard walks you through setup questions and auto-populates key files.
+description: Initialize and personalize your WIZRD repository. Run this after cloning to set up your company context, brand voice, and first client. The wizard researches your website first, then asks clarifying questions.
 user_invocable: true
 ---
 
@@ -13,156 +13,263 @@ User runs `/init` or asks to "initialize", "setup", or "configure" the WIZRD tem
 
 ## Workflow
 
-### Phase 1: Welcome & Assessment
+### Phase 1: Welcome & Quick Start
 
 Start with this introduction:
 
 ```
 Welcome to WIZRD Setup!
 
-I'll help you personalize this template for your business. This takes about 5 minutes.
+I'll personalize this template for your business. First, let me do some research so you don't have to answer a million questions.
 
-We'll configure:
-1. Your company information (for CLAUDE.md)
-2. Your brand voice and communication style
-3. Your services and offerings
-4. Your first client folder (optional)
-
-Let's begin!
+Just tell me:
+1. Your company name
+2. Your website URL (so I can learn about you)
 ```
 
-### Phase 2: Company Information
+Use AskUserQuestion with these fields:
+- Company name (text)
+- Website URL (text) - e.g., "https://example.com"
+- Your name (text) - founder/owner name
 
-Ask these questions using AskUserQuestion tool (batch related questions):
+### Phase 2: Automatic Research
 
-**Question Set 1 - Basic Info:**
-- What's your company name?
-- What's your location (City, Country)?
-- What year was your company founded?
-- Are you remote-first, hybrid, or office-based?
+**After getting the website URL, use WebFetch to research:**
 
-**Question Set 2 - Services:**
-- What services do you offer? (AI consulting, automation, development, other)
-- Who is your ideal client? (size, industry, pain points)
-- What makes you different from competitors?
+1. **Homepage** - Extract:
+   - Tagline / value proposition
+   - Services offered
+   - Target audience hints
+   - Brand voice (formal vs casual, technical vs simple)
 
-**Question Set 3 - Brand Voice:**
-- How would you describe your communication style?
-  - Options: Direct and technical / Friendly and approachable / Professional and formal / Bold and opinionated
-- Do you have specific words or phrases you always use or always avoid?
+2. **About page** (if exists: /about, /about-us, /o-nas) - Extract:
+   - Company story
+   - Team size hints
+   - Location
+   - Founding year
+   - Mission/values
 
-### Phase 3: Auto-Generate Files
+3. **Services page** (if exists: /services, /sluzby, /what-we-do) - Extract:
+   - Specific service offerings
+   - Industries served
+   - Pricing model hints
 
-Based on answers, update these files:
+4. **LinkedIn** (optional, if provided) - Extract:
+   - Company description
+   - Employee count
+   - Recent posts for voice analysis
+
+**Compile Research Summary:**
+```
+Here's what I found about [Company]:
+
+📍 Location: [extracted or "couldn't find"]
+📅 Founded: [extracted or "couldn't find"]
+👥 Team size: [extracted or "couldn't find"]
+
+🎯 What you do:
+[2-3 sentences summarizing services]
+
+🗣️ Your voice sounds:
+[Analysis: formal/casual, technical/simple, etc.]
+
+💼 Services I identified:
+- [Service 1]
+- [Service 2]
+- [Service 3]
+
+🎯 Target clients seem to be:
+[ICP analysis]
+```
+
+### Phase 3: Clarification Questions
+
+Based on research gaps, ask ONLY what's missing or needs confirmation:
+
+**Always ask:**
+- "Did I get your services right? Anything to add or correct?"
+- "What's your #1 differentiator - why do clients choose you over alternatives?"
+
+**Ask if not found:**
+- Location (city, country)
+- Year founded
+- Remote/hybrid/office status
+- Specific words or phrases you always use or avoid
+
+**Ask for brand voice confirmation:**
+- "Based on your website, your voice seems [analysis]. Is that accurate, or would you describe it differently?"
+  - Options: "That's accurate" / "More formal" / "More casual" / "More technical" / "Let me describe it"
+
+### Phase 4: Auto-Generate Files
+
+Based on research + answers, update these files:
 
 #### 1. Update `/CLAUDE.md`
-Replace placeholders with actual company info:
-- Company name, location, founding year
-- Services offered
-- Brand voice description
+Replace all placeholders with real data:
+- Company name, website, location, founding year
+- Services offered (from research + corrections)
+- Brand voice (from analysis + confirmation)
 - Ideal customer profile
+- Differentiator
 
-#### 2. Create `/brand/brand-voice.md` (if detailed voice provided)
-Document specific style guidelines for content generation.
+#### 2. Optionally create `/brand/brand-voice.md`
+If detailed voice guidelines emerged, document them.
 
-### Phase 4: First Client Setup (Optional)
+### Phase 5: First Client Setup (Optional)
 
-Ask: "Would you like to create your first client folder now?"
+Ask: "Would you like to set up your first client folder now?"
 
-If yes:
-- Ask for client company name
-- Ask for industry
-- Ask for primary contact name and role
-- Ask for the main pain point or project goal
+If yes, ask:
+- Client company name
+- Client website (for quick research)
+- Primary contact name and role
+- Main pain point or project goal
 
 Then:
-1. Create `/clients/[client-name]/` folder
-2. Copy templates from `/clients/templates/`
-3. Pre-fill CLAUDE.md with provided info
-4. Create empty context.md and tasks.md
+1. Research client website briefly
+2. Create `/clients/[client-name]/` folder
+3. Copy templates from `/clients/templates/`
+4. Pre-fill CLAUDE.md with researched + provided info
 
-### Phase 5: Cleanup & Next Steps
+### Phase 6: Cleanup & Next Steps
 
 1. Ask: "Should I delete the example client folder (_example-acme-widgets)?"
-   - If yes, remove `/clients/_example-acme-widgets/`
 
 2. Provide completion summary:
 
 ```
 Setup Complete!
 
-Your WIZRD is now configured for [Company Name].
+Your WIZRD is configured for [Company Name].
 
-Files updated:
-- /CLAUDE.md - Your company context
-- [any other files created]
+What I set up:
+✅ /CLAUDE.md - Your company context (AI reads this every session)
+✅ [any other files]
 
-Next steps:
-1. Review /CLAUDE.md and refine if needed
-2. Explore agents: "Use the sales agent to..."
-3. Create more clients: "Create a new client folder for..."
-4. Generate content: "Use the content agent to..."
+Quick test - try these:
+• "Use the sales agent to qualify a lead from [industry]"
+• "Use the content agent to draft a LinkedIn post about [topic]"
+• "Create a new client folder for [company name]"
 
-Run `claude` anytime - I'll remember your company context.
-
-Happy building!
+Your AI now knows your business. Happy building!
 ```
 
-## File Templates
+---
 
-### CLAUDE.md Template
-When updating CLAUDE.md, use this structure:
+## Research Prompts for WebFetch
+
+**Homepage prompt:**
+```
+Extract from this company website:
+1. Main tagline or value proposition
+2. Services or products offered
+3. Target audience (who they serve)
+4. Brand voice tone (formal/casual, technical/simple, playful/serious)
+5. Any unique differentiators mentioned
+Return as structured bullet points.
+```
+
+**About page prompt:**
+```
+Extract from this about page:
+1. Company founding year
+2. Location (city, country)
+3. Team size or company size
+4. Founder/leadership names
+5. Company mission or values
+6. Brief company story
+Return as structured bullet points. Say "not found" for missing items.
+```
+
+**Services page prompt:**
+```
+Extract from this services page:
+1. List all services offered
+2. Industries or client types mentioned
+3. Any pricing information
+4. Key benefits or outcomes promised
+Return as structured bullet points.
+```
+
+---
+
+## CLAUDE.md Template
 
 ```markdown
 ---
 company: {company_name}
+website: {website_url}
 founder: {founder_name}
 location: {city}, {country}
 established: {year}
 ---
 
-# WIZRD - {company_name} AI Operating System
+# WIZRD - {company_name}
+
+> {tagline_or_value_prop}
 
 ## Company Overview
-{company_name} helps {ideal_client_description}.
+
+{company_name} {what_they_do_summary}.
 
 **Details:**
 - **Company**: {company_name}
+- **Website**: {website_url}
 - **Location**: {city}, {country}
 - **Founded**: {year}
 - **Status**: {remote_status}
 
 **Services:**
-{services_list}
+{services_list_with_descriptions}
 
 ## Brand Voice
+
 {brand_voice_description}
+
+**Tone**: {tone_analysis}
 
 **Communication Style:**
 - {style_point_1}
 - {style_point_2}
 - {style_point_3}
 
-**Words to Use:**
-{words_to_use}
+**Words/Phrases to Use:**
+- {word_1}
+- {word_2}
 
-**Words to Avoid:**
-{words_to_avoid}
+**Words/Phrases to Avoid:**
+- {avoid_1}
+- {avoid_2}
 
 ## Ideal Customer Profile
+
 {icp_description}
 
+**Best-fit clients:**
+- {client_type_1}
+- {client_type_2}
+
+**Red flags (not a good fit):**
+- {red_flag_1}
+
+## Differentiator
+
+{why_clients_choose_us}
+
 ## Automation Goals
+
 - Automate routine operations via Claude Code
 - Human focuses on: {human_focus_areas}
 
 ## Guardrails
+
 - Never share client-specific data publicly
 - Always validate data before presenting to clients
 - Escalate to human: New contracts, major decisions, custom pricing
-- Brand consistency: Every output should match your voice
+- Brand consistency: Every output should match the voice above
 
 ## Knowledge Base
+
 - See `/knowledge-base/playbooks/` for implementation patterns
 - See `.claude/skills/` and `.claude/agents/` for AI capabilities
 - See `/clients/templates/` for project templates
@@ -173,24 +280,27 @@ established: {year}
 Ready to work.
 ```
 
+---
+
 ## Guardrails
 
 **Do:**
-- Be encouraging and welcoming
-- Explain WHY each piece of information matters
-- Provide examples when asking questions
-- Allow users to skip optional sections
+- Research first, ask questions second
+- Show what you found before asking for corrections
+- Make the process feel magical ("I already know this about you")
+- Allow skipping any question
+- Be encouraging about their business
 
 **Don't:**
-- Overwhelm with too many questions at once
-- Require information they might not have yet
-- Make assumptions about their business model
-- Force them to complete everything in one session
+- Ask questions you could answer from research
+- Overwhelm with too many questions
+- Make assumptions without offering correction
+- Require perfect information to proceed
 
 ## Success Criteria
 
 Setup is complete when:
-- [ ] CLAUDE.md has real company information (not placeholders)
-- [ ] User understands how to create client folders
-- [ ] User knows how to invoke agents
-- [ ] Example folder is cleaned up (if requested)
+- [ ] CLAUDE.md has real company information (researched + confirmed)
+- [ ] Brand voice is captured accurately
+- [ ] User understands how to use agents
+- [ ] Example folder cleaned up (if requested)
