@@ -277,3 +277,8 @@ MIT License - Use freely, adapt as needed.
 ---
 
 **Ready to transform your business?** Start with `claude` and see the difference.
+
+
+## Author
+
+Made by [Filip Papranec](https://github.com/filippofilip95), founder of [Digitaliko](https://www.digitaliko.com/?utm_source=github&utm_medium=readme&utm_campaign=wizrd), a Slovak studio building custom software and AI agents.
